@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>401 Entrance Practical Example</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<h1>Solar API processor</h1>
+<form id="solarForm">
+	<fieldset>
+		<legend>Enter a date range to get solar production and consumption data</legend>
+		<label for="start">Start Time</label>
+		<input type="date" name="start" value="2016-11-01">
+		<label for="end">End Time</label>
+		<input type="date" name="end" value="2016-11-02">
+		<button type="submit">Get Solar Data</button>
+	</fieldset>
+</form>
+	<h3>Current power</h3>
+<ul id="instant">
+	<li>Current Production: <span id="currProd"></span> Watts</li>
+	<li>Current Consumption: <span id="currCons"></span> Watts</li>
+	<li>Total Used Lifetime: <span id="totalConsLife"></span> Watts	</li>
+	<li>Total Produced Lifetime: <span id="totalProdLife"></span> Watts	</li>
+</ul>
+	<h3>Totals for selected range</h3>
+<ul id="results">
+	<li>Production: <span id="intProd"></span> Watts</li>
+	<li>Consumption: <span id="intCons"></span> Watts</li>
+	<li>From Grid: <span id="intGrid"></span> Watts</li>
+
+</ul>
+<script type="text/javascript" src="process.js"></script>
+</body>
+</html>
