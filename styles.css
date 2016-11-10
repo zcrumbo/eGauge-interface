@@ -1,29 +1,54 @@
 body{
-  width: 600px;
-  max-width: 100%;
-  margin: auto;
-  font-family: Arial,Helvetica,sans-serif;
+	width: 600px;
+	max-width: 100%;
+	margin: auto;
+	font-family: Arial,Helvetica,sans-serif;
 }
-#commentsForm fieldset *{
-  display: block;
-  width: 75%;
-  margin-left:20px;
+#solarForm fieldset{
+	margin-bottom: 30px;
+}
+#solarForm fieldset input{
+ 	width: 30%;
+	margin: 15px
 }
 
-#commentsForm textarea{
-  width: 75%;
-  height: 100px;
-}
-#commentsForm button{
-  display: block;
-  margin-top:15px;
-  max-width:200px; 
+#solarForm button{
+	width: 30%;
+	height: 30px;
+	display: block;
 }
 #results, #instant{
  
-  background-color: #eeeeee;
-  padding: 15px 0px 15px 55px;
+	background-color: #eeeeee;
+	padding: 15px 0px 15px 55px;
 }
 #results li, #instant li{
-  margin: 10px 0px 10px 10px;
+	margin: 10px 0px 10px 10px;
+}
+#preForm button{
+	width: 30%;
+	margin-right: 2%;
+	height: 30px;
+}
+
+@media (max-width: 600px){
+	#solarForm fieldset input{
+		width: 80%;
+		margin: 15px auto;
+		font-size: 18px;
+		display: block;
+	}
+	#solarForm label{
+		display: block;
+		margin: auto;
+		width: 80%;
+	}
+
+	#preForm button, #solarForm button{
+		display: block;
+		width: 80%;
+		margin: 10px auto ;
+		height: 40px;
+		font-size: 18px
+	}
 }

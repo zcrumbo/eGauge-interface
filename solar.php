@@ -7,11 +7,12 @@ if (count($_POST) == 0) {
 };
 date_default_timezone_set('America/Los_Angeles');
 $firstURL = "http://egauge16844.egaug.es/57A4C/cgi-bin/egauge?tot&inst"; //returns totals of power generated and used, plus instantaneous wattage generated and used;
-$baseURL = "http://egauge16844.egaug.es/57A4C/cgi-bin/egauge-show?e&";//for interval data
-$start = $_POST["start"] ? : date("U", strtotime("-1 Day"));//default value is 1 day ago
-$end = $_POST["end"] ? : date(U); //default value is now
-$interval = $_POST["interval"] ? : "d";//default interval is 1 day if not set by form
-$intervalData = new SimpleXMLElement(file_get_contents($baseURL.$interval."&t=".$start."&f=".$end)); 
+$start = empty($_POST["start"]) ? date("U", strtotime("-1 Day")): $_POST['start'] ;//default value is 1 day ago
+$end = empty($_POST["end"]) ? date(U): $_POST['end'] ; //default value is now
+$interval = empty($_POST["interval"]) ? "d" : $_POST['interval'];//default interval is 1 day if not set by form
+$skip = empty($_POST['skip']) ? "" : ("&s=".$_POST["skip"]);
+$reqURL = "http://egauge16844.egaug.es/57A4C/cgi-bin/egauge-show?".$interval.$skip."&t=".$start."&f=".$end;//for interval data
+$intervalData = new SimpleXMLElement(file_get_contents($reqURL)); 
 $prettyDate = "F j, Y, g:i a";
 $baseData = new SimpleXMLElement(file_get_contents($firstURL));
 $lastInterval = count($intervalData->data->r)-1;
@@ -20,7 +21,7 @@ $lastInterval = count($intervalData->data->r)-1;
 foreach($baseData->r as $row){
 	switch($row['n']){
 		case 'Total Generation':
-			$totalMade = ((int) $row->v)/3600000; //power is given in joules, needs to be converted to kWh
+			$totalMade = ((int) $row->v)/3600000; //power is given in joules, needs to be converted to Wh
 			$instantMade = (int) $row->i;
 			break;
 		case 'Total Usage':
@@ -32,7 +33,7 @@ foreach($baseData->r as $row){
 
 $index = 0;
 foreach($intervalData->data->cname as $register){
-	switch($register){//get index value for grid and solar columns
+	switch($register){//get index value for grid and solar columns from returned XML
 		case 'Grid':
 			$gridColumn = $index;
 		case 'Solar':
@@ -59,7 +60,7 @@ $json_array=array(
 	"instant" => array("generation" => $instantMade, "consumption" => $instantUsed),
 	"intervalTotals" => array("consumed"=>$totalPowerInt, "generated"=>$totalSolarInt, "fromGrid"=>$totalGridInt),
 	"requestData"=>$_POST,
-	"requestURL"=>$baseURL.$interval."&t=".$start."&f=".$end
+	"requestURL"=>$reqURL
 );
 echo json_encode($json_array);
 ?>

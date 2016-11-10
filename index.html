@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>401 Entrance Practical Example</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -9,25 +10,34 @@
 <form id="solarForm">
 	<fieldset>
 		<legend>Enter a date range to get solar production and consumption data</legend>
-		<label for="start">Start Time</label>
-		<input type="date" name="start" value="2016-11-01">
-		<label for="end">End Time</label>
-		<input type="date" name="end" value="2016-11-02">
-		<button type="submit">Get Solar Data</button>
+		<label for="start">Start Date</label>
+		<input type="date" name="start" placeholder="yyyy-MM-dd" required id="start">
+		<label for="end">End Date</label>
+		<input type="date" name="end" placeholder="yyyy-MM-dd" required id="end">
+		<input id="hours" name="hours" type ="hidden" value="T00:00">
+		<button type="submit" id="solarSubmit">Get Solar Data</button>
+	</fieldset>
+</form>
+<form id="preForm">
+	<fieldset>
+		<legend>Or select from a preset interval below</legend>
+		<button id="today">Today</button>
+		<button id="thisMonth">This Month</button>
+		<button id="thisYear">This Year</button>
 	</fieldset>
 </form>
 	<h3>Current power</h3>
 <ul id="instant">
-	<li>Current Production: <span id="currProd"></span> Watts</li>
-	<li>Current Consumption: <span id="currCons"></span> Watts</li>
-	<li>Total Used Lifetime: <span id="totalConsLife"></span> Watts	</li>
-	<li>Total Produced Lifetime: <span id="totalProdLife"></span> Watts	</li>
+	<li>Current Production: <span id="currProd"></span> </li>
+	<li>Current Consumption: <span id="currCons"></span> </li>
+	<li>Total Used Lifetime: <span id="totalConsLife"></span> 	</li>
+	<li>Total Produced Lifetime: <span id="totalProdLife"></span> 	</li>
 </ul>
 	<h3>Totals for selected range</h3>
 <ul id="results">
-	<li>Production: <span id="intProd"></span> Watts</li>
-	<li>Consumption: <span id="intCons"></span> Watts</li>
-	<li>From Grid: <span id="intGrid"></span> Watts</li>
+	<li>Production: <span id="intProd"></span> </li>
+	<li>Consumption: <span id="intCons"></span> </li>
+	<li>From Grid: <span id="intGrid"></span> </li>
 
 </ul>
 <script type="text/javascript" src="process.js"></script>
