@@ -1,6 +1,4 @@
-# 401
-
-Functional Example for 401 entrance
+# eGauge Viewer
 
 Accesses the public API for an eGauge residential power monitor.
 
